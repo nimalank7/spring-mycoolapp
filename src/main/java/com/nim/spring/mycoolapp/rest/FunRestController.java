@@ -1,5 +1,7 @@
 package com.nim.spring.mycoolapp.rest;
 
+import com.nim.spring.mycoolapp.Company;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,6 +12,9 @@ import java.time.LocalDateTime;
 public class FunRestController {
     // expose "/" that returns "Hello World"
 
+    @Autowired
+    Company company;
+
     @Value("${coach.name}")
     private String coachName;
 
@@ -18,7 +23,7 @@ public class FunRestController {
 
     @GetMapping("/teaminfo")
     public String getTeamInfo() {
-        return "Coach: " + coachName + ", Team name: " + teamName;
+        return "Coach: " + coachName + ", Team name: " + teamName + " address: " + company.getAddress();
     }
 
     @GetMapping("/")
